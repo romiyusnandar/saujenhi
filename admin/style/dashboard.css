@@ -1,0 +1,47 @@
+body {
+  font-family: Poppins, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  max-width: calc(100% - 300px);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.stat-figure {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.recent-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.recent-list li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
