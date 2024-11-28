@@ -7,7 +7,7 @@
   $error = '';
 
   // debug hasing password
-  // $password_asli = "admin123"; // Password asli
+  // $password_asli = "admin"; // Password asli
   // $hashed_password = password_hash($password_asli, PASSWORD_DEFAULT); // Hash password
   // echo "Password asli: $password_asli <br>";
   // echo "Hash password: $hashed_password <br>";
