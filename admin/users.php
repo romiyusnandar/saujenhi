@@ -49,9 +49,16 @@
     }
   }
 
-  // dapatkan semua user dengan role admin
+  // dapatkan semua user dengan role user
   $result = $conn->query("SELECT * FROM pengguna WHERE role = 'user'");
-  $users = $result->fetch_all(MYSQLI_ASSOC);
+  if (!$result) {
+    die("Error in query: " . $conn->error);
+  }
+
+  $users = [];
+  while ($row = $result->fetch_assoc()) {
+    $users[] = $row;
+  }
 ?>
 
 <!DOCTYPE html>

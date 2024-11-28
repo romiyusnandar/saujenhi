@@ -54,17 +54,28 @@
     }
   }
 
-  // Get all products
+    // Get all products
   $result = $conn->query("SELECT p.*, t.nama_toko, k.nama_kategori FROM produk p
                           JOIN toko t ON p.id_toko = t.id_toko
                           JOIN kategori k ON p.id_kategori = k.id_kategori");
-  $products = $result->fetch_all(MYSQLI_ASSOC);
+  $products = [];
+  while ($row = $result->fetch_assoc()) {
+      $products[] = $row;
+  }
 
   // Get all stores
-  $stores = $conn->query("SELECT id_toko, nama_toko FROM toko")->fetch_all(MYSQLI_ASSOC);
+  $storesResult = $conn->query("SELECT id_toko, nama_toko FROM toko");
+  $stores = [];
+  while ($row = $storesResult->fetch_assoc()) {
+      $stores[] = $row;
+  }
 
   // Get all categories
-  $categories = $conn->query("SELECT id_kategori, nama_kategori FROM kategori")->fetch_all(MYSQLI_ASSOC);
+  $categoriesResult = $conn->query("SELECT id_kategori, nama_kategori FROM kategori");
+  $categories = [];
+  while ($row = $categoriesResult->fetch_assoc()) {
+      $categories[] = $row;
+  }
 ?>
 
 <!DOCTYPE html>

@@ -89,12 +89,23 @@
       die("Error in query: " . $conn->error);
   }
 
-  $reviews = $reviews_result->fetch_all(MYSQLI_ASSOC);
+  $reviews = [];
+  while ($row = $reviews_result->fetch_assoc()) {
+      $reviews[] = $row;
+  }
 
   // Fetch all products
   $products_query = "SELECT id_produk, nama_produk FROM produk";
   $products_result = $conn->query($products_query);
-  $products = $products_result->fetch_all(MYSQLI_ASSOC);
+
+  if (!$products_result) {
+      die("Error in query: " . $conn->error);
+  }
+
+  $products = [];
+  while ($row = $products_result->fetch_assoc()) {
+      $products[] = $row;
+  }
 ?>
 
 <!DOCTYPE html>

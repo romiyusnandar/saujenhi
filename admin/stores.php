@@ -54,7 +54,14 @@
 
   // dapatkan semua toko
   $result = $conn->query("SELECT * FROM toko");
-  $stores = $result->fetch_all(MYSQLI_ASSOC);
+  if (!$result) {
+    die("Error in query: " . $conn->error);
+  }
+
+  $stores = [];
+  while ($row = $result->fetch_assoc()) {
+    $stores[] = $row;
+  }
 ?>
 
 <!DOCTYPE html>
