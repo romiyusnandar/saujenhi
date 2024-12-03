@@ -6,6 +6,11 @@
       exit();
   }
 
+  if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: login.php");
+    exit();
+  }
+
   require_once 'include/db_connection.php';
   require_once 'include/functions.php';
 

@@ -370,6 +370,165 @@ function deleteUser($conn, $id_pengguna) {
       return $products;
   }
 
+  function getProducts($conn, $limit = null) {
+      $sql = "SELECT p.id_produk, p.nama_produk, p.deskripsi, p.harga, p.gambar, t.nama_toko, k.nama_kategori, p.updated_at
+              FROM produk p
+              JOIN toko t ON p.id_toko = t.id_toko
+              JOIN kategori k ON p.id_kategori = k.id_kategori
+              ORDER BY p.updated_at DESC";
+
+      if ($limit !== null) {
+          $sql .= " LIMIT ?";
+      }
+
+      $stmt = $conn->prepare($sql);
+
+      if ($limit !== null) {
+          $stmt->bind_param("i", $limit);
+      }
+
+      $stmt->execute();
+      $stmt->bind_result($id_produk, $nama_produk, $deskripsi, $harga, $gambar, $nama_toko, $nama_kategori, $updated_at);
+
+      $products = [];
+
+      while ($stmt->fetch()) {
+          $products[] = [
+              'id_produk' => $id_produk,
+              'nama_produk' => $nama_produk,
+              'deskripsi' => $deskripsi,
+              'harga' => $harga,
+              'gambar' => $gambar,
+              'nama_toko' => $nama_toko,
+              'nama_kategori' => $nama_kategori,
+              'updated_at' => $updated_at
+          ];
+      }
+
+      $stmt->close();
+      return $products;
+  }
+
+  function getProductsMakanan($conn, $limit = null) {
+      $sql = "SELECT p.id_produk, p.nama_produk, p.deskripsi, p.harga, p.gambar, t.nama_toko, k.nama_kategori, p.updated_at
+              FROM produk p
+              JOIN toko t ON p.id_toko = t.id_toko
+              JOIN kategori k ON p.id_kategori = k.id_kategori
+              WHERE k.nama_kategori = 'Makanan'
+              ORDER BY p.updated_at DESC";
+
+      if ($limit !== null) {
+          $sql .= " LIMIT ?";
+      }
+
+      $stmt = $conn->prepare($sql);
+
+      if ($limit !== null) {
+          $stmt->bind_param("i", $limit);
+      }
+
+      $stmt->execute();
+      $stmt->bind_result($id_produk, $nama_produk, $deskripsi, $harga, $gambar, $nama_toko, $nama_kategori, $updated_at);
+
+      $products = [];
+
+      while ($stmt->fetch()) {
+          $products[] = [
+              'id_produk' => $id_produk,
+              'nama_produk' => $nama_produk,
+              'deskripsi' => $deskripsi,
+              'harga' => $harga,
+              'gambar' => $gambar,
+              'nama_toko' => $nama_toko,
+              'nama_kategori' => $nama_kategori,
+              'updated_at' => $updated_at
+          ];
+      }
+
+      $stmt->close();
+      return $products;
+  }
+
+  function getProductsSnack($conn, $limit = null) {
+    $sql = "SELECT p.id_produk, p.nama_produk, p.deskripsi, p.harga, p.gambar, t.nama_toko, k.nama_kategori, p.updated_at
+            FROM produk p
+            JOIN toko t ON p.id_toko = t.id_toko
+            JOIN kategori k ON p.id_kategori = k.id_kategori
+            WHERE k.nama_kategori = 'Snack'
+            ORDER BY p.updated_at DESC";
+
+    if ($limit !== null) {
+        $sql .= " LIMIT ?";
+    }
+
+    $stmt = $conn->prepare($sql);
+
+    if ($limit !== null) {
+        $stmt->bind_param("i", $limit);
+    }
+
+    $stmt->execute();
+    $stmt->bind_result($id_produk, $nama_produk, $deskripsi, $harga, $gambar, $nama_toko, $nama_kategori, $updated_at);
+
+    $products = [];
+
+    while ($stmt->fetch()) {
+        $products[] = [
+            'id_produk' => $id_produk,
+            'nama_produk' => $nama_produk,
+            'deskripsi' => $deskripsi,
+            'harga' => $harga,
+            'gambar' => $gambar,
+            'nama_toko' => $nama_toko,
+            'nama_kategori' => $nama_kategori,
+            'updated_at' => $updated_at
+        ];
+    }
+
+    $stmt->close();
+    return $products;
+}
+
+function getProductsDrink($conn, $limit = null) {
+  $sql = "SELECT p.id_produk, p.nama_produk, p.deskripsi, p.harga, p.gambar, t.nama_toko, k.nama_kategori, p.updated_at
+          FROM produk p
+          JOIN toko t ON p.id_toko = t.id_toko
+          JOIN kategori k ON p.id_kategori = k.id_kategori
+          WHERE k.nama_kategori = 'Minuman'
+          ORDER BY p.updated_at DESC";
+
+  if ($limit !== null) {
+      $sql .= " LIMIT ?";
+  }
+
+  $stmt = $conn->prepare($sql);
+
+  if ($limit !== null) {
+      $stmt->bind_param("i", $limit);
+  }
+
+  $stmt->execute();
+  $stmt->bind_result($id_produk, $nama_produk, $deskripsi, $harga, $gambar, $nama_toko, $nama_kategori, $updated_at);
+
+  $products = [];
+
+  while ($stmt->fetch()) {
+      $products[] = [
+          'id_produk' => $id_produk,
+          'nama_produk' => $nama_produk,
+          'deskripsi' => $deskripsi,
+          'harga' => $harga,
+          'gambar' => $gambar,
+          'nama_toko' => $nama_toko,
+          'nama_kategori' => $nama_kategori,
+          'updated_at' => $updated_at
+      ];
+  }
+
+  $stmt->close();
+  return $products;
+}
+
   function addReview($conn, $id_produk, $id_pengguna, $rating, $komentar) {
       $sql = "INSERT INTO review (id_produk, id_pengguna, rating, komentar) VALUES (?, ?, ?, ?)";
       $stmt = $conn->prepare($sql);

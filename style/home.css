@@ -1,0 +1,180 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
+
+body {
+  font-family: Poppins, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  background-color: #881050;
+  align-items: center;
+  padding: 20px;
+}
+
+.inner-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.mid-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 150px;
+  max-width: 100%;
+  height: auto;
+  margin-right: 10px;
+}
+
+h1 {
+  font-family: "Irish Grover", sans-serif;
+  color: white;
+}
+
+.search-bar {
+  position: relative;
+  width: 300px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.search-bar input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 10px 0 40px;
+  background-color: white;
+}
+
+.search-bar img {
+  width: 20px;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.user-icon {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.user-icon img {
+  width: 100px;
+  max-width: 100%;
+  height: auto;
+}
+
+.user-icon a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.category {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+.category-item {
+  text-align: center;
+  cursor: pointer;
+  padding-top: 40px;
+  transition: transform 0.3s ease-in-out
+}
+.category-item:hover {
+  transform: scale(1.05);
+}
+.category-item img {
+  width: 100px;
+  height: 100px;
+}
+.section {
+  padding: 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+.section-title {
+  font-size: 24px;
+  padding: 20px;
+  font-weight: bold;
+  margin-bottom: 20 px;
+  color: #e9598c;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-card {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  width: 300px;
+  margin: 10px auto;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.product-price {
+  font-size: 14px;
+  color: #e44d26;
+  margin: 5px 0 0 0;
+}
