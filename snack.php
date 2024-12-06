@@ -33,13 +33,15 @@
   <div class="section">
     <div class="product-grid">
         <?php foreach ($productsMakanan as $product): ?>
-            <div class="product-card">
-                <img src="<?php echo htmlspecialchars('admin/' . $product['gambar']); ?>" alt="<?php echo htmlspecialchars($product['nama_produk']); ?>" class="product-image">
-                <div class="product-info">
-                    <h3 class="product-title"><?php echo htmlspecialchars($product['nama_produk']); ?></h3>
-                    <p class="product-price">Rp <?php echo number_format($product['harga'], 0, ',', '.'); ?></p>
-                </div>
-            </div>
+            <a href="product_detail.php?id=<?php echo htmlspecialchars($product['id_produk'] ?? ''); ?>">
+              <div class="product-card">
+                  <img src="<?php echo htmlspecialchars('admin/' . $product['gambar']); ?>" alt="<?php echo htmlspecialchars($product['nama_produk']); ?>" class="product-image">
+                  <div class="product-info">
+                      <h3 class="product-title"><?php echo htmlspecialchars($product['nama_produk']); ?></h3>
+                      <p class="product-price">Rp <?php echo number_format($product['harga'], 0, ',', '.'); ?></p>
+                  </div>
+              </div>
+            </a>
         <?php endforeach; ?>
     </div>
   </div>

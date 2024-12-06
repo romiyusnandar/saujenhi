@@ -546,4 +546,82 @@ function getProductsDrink($conn, $limit = null) {
       $stmt->close();
       return $result;
   }
+
+  function getProductById($conn, $id_produk) {
+    $stmt = $conn->prepare("
+        SELECT
+            p.id_produk, p.nama_produk, p.deskripsi, p.harga, p.gambar,
+            p.id_toko, p.id_kategori, t.kontak
+        FROM
+            produk p
+        JOIN
+            toko t ON p.id_toko = t.id_toko
+        WHERE
+            p.id_produk = ?
+    ");
+    $stmt->bind_param("i", $id_produk);
+    $stmt->execute();
+    $stmt->bind_result($id, $nama_produk, $deskripsi, $harga, $gambar, $id_toko, $id_kategori, $kontak);
+
+    if ($stmt->fetch()) {
+        $product = [
+            'id_produk' => $id,
+            'nama_produk' => $nama_produk,
+            'deskripsi' => $deskripsi,
+            'harga' => $harga,
+            'gambar' => $gambar,
+            'id_toko' => $id_toko,
+            'id_kategori' => $id_kategori,
+            'kontak' => $kontak // Data kontak toko
+        ];
+        $stmt->close();
+        return $product;
+    } else {
+        $stmt->close();
+        return null;
+    }
+}
+
+
+  function getReviewsByProductId($conn, $product_id) {
+      $sql = "SELECT r.id_ulasan, r.rating, r.komentar, r.updated_at, u.username
+              FROM ulasan r
+              JOIN pengguna u ON r.id_pengguna = u.id_pengguna
+              WHERE r.id_produk = ?";
+
+      $stmt = $conn->prepare($sql);
+
+      if (!$stmt) {
+          // Jika prepare statement gagal, tampilkan error dan return array kosong
+          error_log("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+          return [];
+      }
+
+      $stmt->bind_param("i", $product_id);
+
+      if (!$stmt->execute()) {
+          // Jika eksekusi gagal, tampilkan error dan return array kosong
+          error_log("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
+          $stmt->close();
+          return [];
+      }
+
+      $stmt->bind_result($id_review, $rating, $komentar, $tanggal_review, $username);
+
+      $reviews = [];
+      while ($stmt->fetch()) {
+          $reviews[] = [
+              'id_review' => $id_review,
+              'rating' => $rating,
+              'komentar' => $komentar,
+              'tanggal_review' => $tanggal_review,
+              'username' => $username
+          ];
+      }
+
+      $stmt->close();
+      return $reviews;
+  }
+
+
 ?>

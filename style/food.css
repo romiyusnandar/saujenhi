@@ -6,6 +6,10 @@ body {
   background-color: #f9f9f9;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   display: flex;
   justify-content: center;

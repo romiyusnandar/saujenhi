@@ -6,6 +6,11 @@
       exit();
   }
 
+  if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+    header("Location: admin/index.php");
+    exit();
+  }
+
   require_once 'admin/include/db_connection.php';
   require_once 'admin/include/functions.php';
 
@@ -32,7 +37,9 @@
         </div>
       </div>
       <div class="user-icon">
-        <img src="assets/user_profile.svg" alt="User  Icon">
+        <a href="profile.php">
+          <img src="assets/user_profile.svg" alt="User  Icon">
+        </a>
         <a href="admin/logout.php">Logout</a>
       </div>
     </div>
@@ -59,18 +66,20 @@
   </div>
   <div class="section">
   <h2 class="section-title">Recommended Dishes</h2>
-  <div class="product-grid">
+    <div class="product-grid">
       <?php foreach ($products as $product): ?>
-          <div class="product-card">
-              <img src="<?php echo htmlspecialchars('admin/' . $product['gambar']); ?>" alt="<?php echo htmlspecialchars($product['nama_produk']); ?>" class="product-image">
-              <div class="product-info">
-                  <h3 class="product-title"><?php echo htmlspecialchars($product['nama_produk']); ?></h3>
-                  <p class="product-price">Rp <?php echo number_format($product['harga'], 0, ',', '.'); ?></p>
+          <a href="product_detail.php?id=<?php echo htmlspecialchars($product['id_produk'] ?? ''); ?>" class="product-link">
+              <div class="product-card">
+                  <img src="<?php echo htmlspecialchars('admin/' . ($product['gambar'] ?? '')); ?>" alt="<?php echo htmlspecialchars($product['nama_produk'] ?? ''); ?>" class="product-image">
+                  <div class="product-info">
+                      <h3 class="product-title"><?php echo htmlspecialchars($product['nama_produk'] ?? ''); ?></h3>
+                      <p class="product-price">Rp <?php echo number_format($product['harga'] ?? 0, 0, ',', '.'); ?></p>
+                  </div>
               </div>
-          </div>
+          </a>
       <?php endforeach; ?>
+    </div>
   </div>
-</div>
 
 </body>
 </html>
