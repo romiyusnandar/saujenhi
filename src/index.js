@@ -1,4 +1,5 @@
 const express = require("express")
+// const dotenv = require('dotenv')
 const userRoutes = require("./routes/users")
 const storeRoutes = require("./routes/store")
 const authRoutes= require("./routes/auth")
@@ -9,6 +10,8 @@ const reviewRoutes = require("./routes/review")
 const orderRoutes = require("./routes/order")
 const logging = require("./middleware/logs")
 
+require('dotenv').config();
+// dotenv.config()
 const app = express()
 
 app.use(logging)
@@ -33,6 +36,7 @@ app.get("/", (req, res) => {
   ])
 })
 
-app.listen(4000, () => {
-  console.log("Server is running on port 4000")
+const port = process.env.PORT
+app.listen(parseInt(port), () => {
+  console.log(`Server is running on port ${port}`)
 })

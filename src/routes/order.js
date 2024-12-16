@@ -1,17 +1,15 @@
 const express = require("express")
 const router = express.Router()
 const {
-  createOrder,
-  getOrderById,
-  updateOrderStatus,
-  updateShippingStatus,
-  getOrdersByUserId
+  createTransaction,
+  getTransactions,
+  getTransactionById,
+  updateTransactionStatus
 } = require("../controller/oder")
 
-router.post("/order", createOrder)
-router.get("/order/:orderId", getOrderById)
-router.patch("/order/:orderId/status", updateOrderStatus)
-router.patch("/order/:orderId/shipping-status", updateShippingStatus)
-router.get("/orders/user/:userId", getOrdersByUserId)
+router.post("/order", createTransaction)
+router.get("/order", getTransactions)
+router.get("/order/:transaction_id", getTransactionById)
+router.patch("/order/:transaction_id", updateTransactionStatus)
 
 module.exports = router
